@@ -12,5 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.18.11"
+  },
+  "dependencies": {
+    "mariadb": "^2.0.3",
+    "ws": "^6.2.1"
   }
 }
