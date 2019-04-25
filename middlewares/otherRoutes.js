@@ -4,15 +4,15 @@ const path = require('path');
 
 const mimeTypes  = require('./mimeTypes');
 
-const serveSocketIOClient = (req, res) =>{
-    res.writeHead(200, {'Content-Type': mimeTypes['.js']});
-    console.log('algo');
-    fs.readFile('/node_modules/socket.io-client/dist/socket.io.js',(err,contenido)=>{
+const logout = (req, res)=>{
+    req.session.reset();
+    fs.readFile('./static/views/index.html',(err,contenido)=>{
+        res.writeHead(200, {'Content-Type': mimeTypes['.html']});
         return res.end(contenido);
     });
 }
 
 module.exports = 
 [
-    {link: '/socket.io/socket.io.js', action:serveSocketIOClient, method: 'get'},
+    {link: '/logout', action:logout},
 ];

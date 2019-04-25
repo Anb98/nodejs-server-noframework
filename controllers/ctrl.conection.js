@@ -6,7 +6,7 @@ const pool = mariadb.createPool({
     host    : db.HOST, 
     user    : db.USER, 
     password: db.PASS,
-    database: 'databaseName'
+    database: 'mediclinic'
 });
 
 const conectarDB = async ()=>{
