@@ -1,10 +1,10 @@
 const http = require('http');
 
-const {PORT,HOST} = require('./config');
+const {app} = require('./config');
 
 
-const {serveStaticFiles} = require('./middlewares');
-const server = http.createServer(serveStaticFiles);
+const serverHandler = require('./middlewares');
+const server = http.createServer(serverHandler);
 
 
 const io     = require('socket.io')(server);
@@ -14,6 +14,6 @@ socket(io);
 
 require('./controllers/ctrl.calendario')();
 
-server.listen(PORT, HOST, ()=>{
-    console.log(`Server running on: https://${HOST}:${PORT}`);
+server.listen(app.PORT, app.HOST, ()=>{
+    console.log(`Server running on: https://${app.HOST}:${app.PORT}`);
 });

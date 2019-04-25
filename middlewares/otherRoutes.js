@@ -12,6 +12,7 @@ const serveSocketIOClient = (req, res) =>{
     });
 }
 
-module.exports = [
-    {required: '/socket.io/socket.io.js', action:serveSocketIOClient}
+module.exports = 
+[
+    {link: '/socket.io/socket.io.js', action:serveSocketIOClient, method: 'get'},
 ];
