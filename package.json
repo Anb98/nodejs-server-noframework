@@ -19,7 +19,6 @@
   "dependencies": {
     "client-sessions": "^0.8.0",
     "mariadb": "^2.0.3",
-    "socket.io": "^2.2.0",
-    "ws": "^6.2.1"
+    "socket.io": "^2.2.0"
   }
 }

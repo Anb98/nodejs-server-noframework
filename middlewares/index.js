@@ -2,25 +2,8 @@ const fs   = require('fs');
 const url  = require('url');
 const path = require('path');
 
-const mimeTypes = {
-    '.html': 'text/html',
-    '.js'  : 'text/javascript',
-    '.css' : 'text/css',
-    '.json': 'application/json',
-    '.png' : 'image/png',
-    '.jpg' : 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.gif' : 'image/gif',
-    '.ico' : 'image/x-icon',
-    '.wav' : 'audio/wav',
-    '.mp4' : 'video/mp4',
-    '.pdf' : 'application/pdf',
-    '.woff': 'application/font-woff',
-    '.ttf' : 'application/font-ttf',
-    '.eot' : 'application/vnd.ms-fontobject',
-    '.otf' : 'application/font-otf',
-    '.svg' : 'application/image/svg+xml'
-};
+const mimeTypes  = require('./mimeTypes');
+const otherPaths = require('./otherPaths');
 
 /**
  * 
@@ -43,8 +26,16 @@ const serveStaticFiles = (req, res) =>{
 
     //divide la url en sus partes: parametros get, pathname, etc
     const preUrl = url.parse(req.url,true);
-    let rutaArchivo = "./static" + preUrl.pathname;
+    const ruta = otherPaths.find((value, i)=>{
+        if(preUrl.pathname==value.required)
+        return value;
+    });
 
+    //si la rulta existe en otherPath realizar accion para la ruta
+    if(ruta) return ruta.action(req,res);
+
+
+    let rutaArchivo = "./static" + preUrl.pathname;
 
     //si no solicita ningun archivo buscar el index de esa carpeta
     if(!path.extname(rutaArchivo)) 
