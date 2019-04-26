@@ -12,7 +12,7 @@ const socket = require('./sockets');
 socket(io);
 
 
-require('./controllers/ctrl.calendario')();
+// require('./controllers/ctrl.calendario')();
 
 server.listen(app.PORT, app.HOST, ()=>{
     console.log(`Server running on: https://${app.HOST}:${app.PORT}`);
