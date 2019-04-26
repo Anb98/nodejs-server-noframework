@@ -8,8 +8,16 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anb98/nodejs-server-noframework.git"
+  },
   "author": "Abdiel Martinez",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anb98/nodejs-server-noframework/issues"
+  },
+  "homepage": "https://github.com/Anb98/nodejs-server-noframework#readme",
   "devDependencies": {
     "gulp": "^4.0.1",
     "gulp-pug": "^4.0.1",
