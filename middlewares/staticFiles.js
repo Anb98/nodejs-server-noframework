@@ -3,24 +3,7 @@ const url      = require('url');
 const path     = require('path');
 
 const mimeTypes   = require('./mimeTypes');
-const otherRoutes = require('./otherRoutes');
 const auth        = require('./auth');
-
-const customRoutes = (req, pathname) =>{
-    const ruta = otherRoutes.find((route, i)=>{
-        const method      = req.method.toLowerCase();
-        const routeMethod = route.method && route.method.toLowerCase() || 'get';
-
-        if(pathname==route.link && method == routeMethod)
-            return route;
-    });
-
-
-    //si la rulta existe en otherRoutes realizar accion para la ruta
-    if(ruta) return ruta.action;
-    else return false;
-};
-
 
 /**
  * Envia al cliente los archivos estaticos solicitados
@@ -30,10 +13,6 @@ const customRoutes = (req, pathname) =>{
 const serveStaticFiles = (req, res) => {
 
     const preUrl = url.parse(req.url,true);     //divide la url en sus partes: parametros get, pathname, etc
-    
-
-    const isCustomRoute = customRoutes(req, preUrl.pathname);   
-    if(isCustomRoute) return isCustomRoute(req,res);     // si es una ruta establecida que retorne su accion
 
     let rutaArchivo = "./static" + preUrl.pathname;
 

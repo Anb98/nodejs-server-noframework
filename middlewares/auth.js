@@ -1,16 +1,11 @@
-const fs = require('fs');
+const fs        = require('fs');
 const mimeTypes = require('./mimeTypes');
 
 module.exports = (req,res,rutaArchivo) =>{
 
-    const isSession = Object.keys(req.session).length;
-    const rolUser = req.session.rol;
-    const carpetaRol = rutaArchivo.split('/')[3];
-
-    console.log('isSession :', isSession);
-    console.log('rolUser :', rolUser);
-    console.log('carpetaRol :', carpetaRol);
-    
+    const isSession  = Object.keys(req.session).length;
+    const rolUser    = req.session.rol;
+    const carpetaRol = rutaArchivo.split('/')[3];  
 
     if(isSession)
     {   //no autenticado

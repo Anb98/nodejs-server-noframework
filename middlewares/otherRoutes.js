@@ -1,18 +1,30 @@
-const fs   = require('fs');
-const url  = require('url');
-const path = require('path');
-
 const mimeTypes  = require('./mimeTypes');
 
-const logout = (req, res)=>{
-    req.session.reset();
-    fs.readFile('./static/views/index.html',(err,contenido)=>{
-        res.writeHead(200, {'Content-Type': mimeTypes['.html']});
-        return res.end(contenido);
-    });
+const logout = (req)=>{
+    req.session = {};
+    req.url= '/index.html';
+    return req;
 }
 
-module.exports = 
-[
+
+const routes = [
     {link: '/logout', action:logout},
+
 ];
+
+const customRoutes = (req, pathname) =>{
+    const ruta = routes.find((route, i)=>{
+        const method      = req.method.toLowerCase();
+        const routeMethod = route.method && route.method.toLowerCase() || 'get';
+
+        if(pathname==route.link && method == routeMethod)
+            return route;
+    });
+
+
+    //si la rulta existe en otherRoutes realizar accion para la ruta
+    if(ruta) return ruta.action;
+    else return false;
+};
+
+module.exports = customRoutes;
